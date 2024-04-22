@@ -6,11 +6,11 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(detect-pkts detect_pkts.cpp)
 
 target_include_directories(detect-pkts PUBLIC "/usr/include/dpdk")
+target_link_directories(detect-pkts PUBLIC "/usr/include/lib64")
 
 target_link_libraries(detect-pkts PUBLIC
                       -lrte_node
                       -lrte_graph
-                      -lrte_flow_classify
                       -lrte_pipeline
                       -lrte_table
                       -lrte_pdump
@@ -57,7 +57,8 @@ target_link_libraries(detect-pkts PUBLIC
                       -lrte_ring
                       -lrte_eal
                       -lrte_telemetry
-                      -lrte_kvargs)
+                      -lrte_kvargs
+                      -lrte_net_vmxnet3)
 
 target_compile_options(detect-pkts PUBLIC -O3 -ggdb3 -Wall -Werror)
 
